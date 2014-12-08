@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import edu.npu.fr.dao.FlightDaoI;
 import edu.npu.fr.dao.ReservationDaoI;
 import edu.npu.fr.domain.Flight;
 import edu.npu.fr.domain.Passenger;
@@ -17,18 +18,20 @@ public class FlightReservationService implements FlightReservationServiceI{
 	@Autowired
 	@Qualifier("reservationDaoJdbc")
 	private ReservationDaoI dao;
+	
+	@Autowired
+	@Qualifier("flightDaoJdbc")
+	private FlightDaoI flightDao;
 
 	@Override
 	public List<Flight> getFlights(String from, String to, Date depart) {
-		// TODO Auto-generated method stub
-		return null;
+		return flightDao.getFlights(from, to, depart);
 	}
 
 	@Override
 	public Reservation reserveFlight(Flight flight, Date depart,
 			List<Passenger> passengers) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.reserveFlight(flight, depart, passengers);
 	}
 
 	@Override
@@ -38,13 +41,13 @@ public class FlightReservationService implements FlightReservationServiceI{
 
 	@Override
 	public void deleteReservation(String code) {
-		// TODO Auto-generated method stub
+		dao.deleteReservation(code);
 		
 	}
 
 	@Override
 	public void updateReservation(String code, Reservation updated) {
-		// TODO Auto-generated method stub
+		dao.updateReservation(code, updated);
 		
 	}
 

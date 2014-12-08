@@ -1,5 +1,7 @@
 package edu.npu.fr.dao.jdbc;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +13,9 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -62,12 +66,20 @@ public class ReservationDaoJdbc implements ReservationDaoI{
 	public void deleteReservation(String code){
 		String sql = "DELETE FROM RESERVATION WHERE Code = :code";
 		MapSqlParameterSource params = new MapSqlParameterSource("code", code);
-		dbTemplate.execute(sql, params, null);
+		PreparedStatementCallback<Object> action = new PreparedStatementCallback<Object>() {
+			
+			@Override
+			public Object doInPreparedStatement(PreparedStatement ps)
+					throws SQLException, DataAccessException {
+				return ps.execute();
+			}
+		};
+		dbTemplate.execute(sql, params, action);
 	}
 	
 	private MapSqlParameterSource getReservationParamMap(Reservation reservation){
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("Code", randomString(6));
+		params.addValue("Code", reservation.getCode());
 		params.addValue("Flight_id", reservation.getFlight().getId());
 		return params;
 	}
@@ -80,6 +92,7 @@ public class ReservationDaoJdbc implements ReservationDaoI{
 		Reservation reservation = new Reservation();
 		reservation.setPassenger(passengers);
 		reservation.setFlight(flight);
+		reservation.setCode(randomString(6));
 		
 		// TODO Auto-generated method stub
 		

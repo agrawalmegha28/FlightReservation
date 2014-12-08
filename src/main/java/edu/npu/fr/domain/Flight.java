@@ -36,7 +36,7 @@ public class Flight {
 	}
 	
 	public String toString() {
-		return "Student[id: " + id + ", " + name + "]";
+		return "Flight[id: " + id + ", " + name + "]";
 	}
 	
 	public boolean hasId(long id) {

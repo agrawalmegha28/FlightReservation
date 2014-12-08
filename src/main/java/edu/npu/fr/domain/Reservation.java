@@ -44,5 +44,11 @@ public class Reservation {
 	public void setId(List<Integer> id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() {
+		
+		return "Flight: " +flight + "Code: " + code ;
+	}
 
 }

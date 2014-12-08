@@ -2,11 +2,13 @@ package edu.npu.fr.resthandlers;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import edu.npu.fr.domain.Reservation;
 import edu.npu.fr.exceptions.UnknownResourceException;
 import edu.npu.fr.services.FlightReservationServiceI;
+
 
 
 @Path("/flightrestapp")
@@ -51,4 +54,17 @@ public class FlightRestHandler {
 		logger.debug("Deleted Reservation with code" + code);
 		return respBuilder.build();
 	}
+	
+	@POST
+	@Path("/reservation")
+	public Response createReservation(Reservation reservation) {
+		ResponseBuilder respBuilder;
+		
+		Reservation r = flightResService.reserveFlight(reservation.getFlight(), 
+				reservation.getDepart(), reservation.getPassenger());
+		respBuilder = Response.status(Status.CREATED);
+		respBuilder.entity(r);
+		return respBuilder.build();
+	}
+	
 }
