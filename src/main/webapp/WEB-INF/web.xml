@@ -24,10 +24,30 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+	
+	
+		<!-- Jersey Configuration -->
+	<servlet>
+   		 <servlet-name>JerseyWebApplication</servlet-name>
+   		 <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+			<init-param>
+    		  <param-name>javax.ws.rs.Application</param-name>
+    		  <param-value>edu.npu.fr.resthandlers.RestApplicationConfig</param-value>
+    		</init-param>
+   		 <load-on-startup>1</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+	<!-- Jersey Mappings -->
+	<servlet-mapping>
+    	<servlet-name>JerseyWebApplication</servlet-name>
+    	<url-pattern>/webservices/*</url-pattern>
+  	</servlet-mapping>
+  	
+	
 
 </web-app>

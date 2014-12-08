@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "reservation")
 public class Reservation {
 	private List<Integer> id = new ArrayList<Integer>();
 	private List<Passenger> passenger = new ArrayList<Passenger>();
