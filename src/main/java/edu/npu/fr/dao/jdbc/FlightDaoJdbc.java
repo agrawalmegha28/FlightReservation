@@ -71,8 +71,14 @@ public class FlightDaoJdbc implements FlightDaoI {
 	@Override
 	//This method will read flights
 	public List<Flight> getFlights(String from, String to, Date depart) {
-		String SQL = "SELECT * FROM Flight WHERE Ffrom = :from AND Fto = :to AND Depart = :depart";  
-		List<Flight> flights = (List<Flight>) dbTemplate.query(SQL, new FlightRowMapper());  
+		String sql = "SELECT * FROM Flight WHERE Ffrom = :Ffrom AND Fto = :Fto";
+		Flight flight = new Flight();
+		flight.setFrom(from);
+		flight.setTo(to);
+		flight.setDepart(depart);
+		System.out.println(flight);
+		MapSqlParameterSource params = getFlightParamMap(flight);
+		List<Flight> flights = dbTemplate.query(sql, params, new FlightRowMapper());
 		return flights;  
 	}
 
