@@ -28,7 +28,7 @@ public class FlightDaoMock implements FlightDaoI {
 		for (int i = 0; i < 10; i++ ){
 			Flight f = new Flight();
 			f.setName("A" + i);
-			f.setDepart(depart);
+			f.setDepart(depart.toString());
 			f.setFrom(from);
 			f.setPrice(10000);
 			f.setTo(to);
@@ -50,5 +50,10 @@ public class FlightDaoMock implements FlightDaoI {
 	public int updateFlight(Flight flight) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public Flight getFlight(int flightId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

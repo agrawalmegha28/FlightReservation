@@ -1,7 +1,11 @@
 package edu.npu.fr.dao.jdbc;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -14,6 +18,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import edu.npu.fr.dao.FlightDaoI;
 import edu.npu.fr.dao.PassengerDaoI;
@@ -53,7 +58,14 @@ public class PassengerDaoJdbc implements PassengerDaoI {
 		params.addValue("MName", passenger.getmName());
 		params.addValue("LName", passenger.getlName());
 		params.addValue("Gender", passenger.getGender());
-		params.addValue("Dob", passenger.getDob());
+		Date dob = null;
+		DateFormat format = new SimpleDateFormat("yyyy/mm/dd", Locale.ENGLISH);
+		try {
+			dob = format.parse(passenger.getDob());
+		} catch (ParseException e) {
+				System.out.println("DOB is " + passenger.getDob());
+		}
+		params.addValue("Dob", dob);
 		return params;
 	}
 	

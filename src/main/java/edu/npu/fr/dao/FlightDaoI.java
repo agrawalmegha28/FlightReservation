@@ -10,4 +10,5 @@ public interface FlightDaoI {
 	public Flight addNewFlight(Flight flight);
 	public int deleteFlight(Flight flight);
 	public int updateFlight(Flight flight);
+	public Flight getFlight(int flightId);
 }

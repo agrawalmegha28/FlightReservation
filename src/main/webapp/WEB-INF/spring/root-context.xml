@@ -23,7 +23,10 @@
 		<context:exclude-filter type="regex"  expression="edu.npu.fr.controllers"/>
 	</context:component-scan>
 	
-	<tx:annotation-driven transaction-manager="txManager" /> 
+	<tx:annotation-driven transaction-manager="txManager" />
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+      <property name="basename" value="messages"/>
+    </bean>
 	
 </beans>
 

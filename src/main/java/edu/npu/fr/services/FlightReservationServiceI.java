@@ -13,5 +13,6 @@ public interface FlightReservationServiceI {
 	public Reservation searchReservation(String code);
 	public void deleteReservation(String code);
 	public void updateReservation(String code, Reservation updated);
+	public Flight getFlight(int flightId);
 
 }

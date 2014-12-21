@@ -66,7 +66,7 @@ public class FlightReservationServicesClient {
 
 	private static Reservation createNewReservation() {
 		Flight flight = new Flight();
-		flight.setDepart(new Date());
+		flight.setDepart("2014-12-12");
 		flight.setFrom("USA");
 		flight.setTo("India");
 		flight.setName("Lufthansa");
@@ -75,7 +75,7 @@ public class FlightReservationServicesClient {
 		flight.setId(15);
 		
 		Passenger passenger = new Passenger();
-		passenger.setDob(new Date());
+		passenger.setDob(new Date().toString());
 		passenger.setfName("NPU");
 		passenger.setlName("Agrawal");
 		passenger.setGender("F");

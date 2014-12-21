@@ -27,13 +27,13 @@ public class ReservationRowMapper implements RowMapper<Reservation> {
 		flight.setFrom(resultSet.getString("Ffrom"));
 		flight.setTo(resultSet.getString("Fto"));
 		flight.setId(resultSet.getInt("Flight_id"));
-		flight.setDepart(resultSet.getDate("Depart"));
+		flight.setDepart(resultSet.getDate("Depart").toString());
 		flight.setName(resultSet.getString("F.FName"));
 		flight.setPrice(resultSet.getFloat("Price"));
 		reservation.setFlight(flight);
 		
 		Passenger p = new Passenger();
-		p.setDob(resultSet.getDate("Dob"));
+		p.setDob(resultSet.getDate("Dob").toString());
 		p.setfName(resultSet.getString("P.FName"));
 		p.setlName(resultSet.getString("LName"));
 		p.setmName(resultSet.getString("MName"));

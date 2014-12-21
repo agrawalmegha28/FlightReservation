@@ -16,7 +16,7 @@ public class FlightRowMapper implements RowMapper<Flight> {
 		  flight.setTo(rs.getString("Fto"));    
 		  flight.setName(rs.getString("FName"));   
 		  flight.setPrice(rs.getFloat("Price"));
-		  flight.setDepart(rs.getDate("Depart"));
+		  flight.setDepart(rs.getDate("Depart").toString());
 		  flight.setNo(rs.getInt("FNo"));
 		  return flight;    
 		 }    

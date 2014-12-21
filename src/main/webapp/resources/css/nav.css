@@ -1,0 +1,14 @@
+.error {
+	  color: #ff0000;
+	  font-style: italic;
+}
+
+
+table, tr {
+    border: 1px solid green;
+}
+
+tr {
+    background-color: green;
+    color: white;
+}

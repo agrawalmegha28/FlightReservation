@@ -3,15 +3,21 @@ package edu.npu.fr.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @XmlRootElement(name = "flight")
 public class Flight {
 	private long id;
 	private String name;
+	@NotEmpty
 	private String from;
+	@NotEmpty
 	private String to;
-	private Date depart;
+	@NotNull
+	private String depart;
 	private float price;
 	private int no;
 	
@@ -36,7 +42,7 @@ public class Flight {
 	}
 	
 	public String toString() {
-		return "Flight[id: " + id + ", " + name + ", " + from + ", " + to + ", ]";
+		return "Flight[id: " + id + ", " + name + ", " + from + ", " + to +  ", date " + depart + ", ]";
 	}
 	
 	public boolean hasId(long id) {
@@ -72,11 +78,11 @@ public class Flight {
 		this.to = to;
 	}
 
-	public Date getDepart() {
+	public String getDepart() {
 		return depart;
 	}
 
-	public void setDepart(Date depart) {
+	public void setDepart(String depart) {
 		this.depart = depart;
 	}
 

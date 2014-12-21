@@ -7,7 +7,7 @@ public class Passenger {
 	private String fName;
 	private String mName;
 	private String lName;
-	private Date dob;
+	private String dob;
 	private String gender;
 	
 	public Passenger() {
@@ -63,12 +63,22 @@ public class Passenger {
 	}
 
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "firstName : " + fName + " lastName : " + lName + " dob : " + dob;
+	}
+
+	public boolean isValid() {
+		return fName != null && lName != null && dob != null && !(fName.equals("") || lName.equals("") || dob.equals(""));
 	}
 }

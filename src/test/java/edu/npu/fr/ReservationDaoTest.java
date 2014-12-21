@@ -35,7 +35,7 @@ public class ReservationDaoTest {
 //This method will test for the reserved flight
 	public void testReserveFlight(){
 		Flight flight = new Flight();
-		flight.setDepart(new Date());
+		flight.setDepart("2014-12-12");
 		flight.setFrom("USA");
 		flight.setTo("India");
 		flight.setName("Lufthansa");
@@ -44,7 +44,7 @@ public class ReservationDaoTest {
 		flightDao.addNewFlight(flight);
 		
 		Passenger passenger = new Passenger();
-		passenger.setDob(new Date());
+		passenger.setDob(new Date().toString());
 		passenger.setfName("Megha");
 		passenger.setlName("Agrawal");
 		passenger.setGender("F");
@@ -62,7 +62,7 @@ public class ReservationDaoTest {
 	//This method will test for rollback when there is wrong entry
 	public void testReserveFlightRollback(){
 		Flight flight = new Flight();
-		flight.setDepart(new Date());
+		flight.setDepart("2014-12-12");
 		flight.setFrom("France");
 		flight.setTo("USA");
 		flight.setName("Lufthansa");
@@ -71,13 +71,13 @@ public class ReservationDaoTest {
 		flightDao.addNewFlight(flight);
 		
 		Passenger passenger = new Passenger();
-		passenger.setDob(new Date());
+		passenger.setDob(new Date().toString());
 		passenger.setfName("Megha");
 		passenger.setlName("Agrawal");
 		passenger.setGender("F");
 		
 		Passenger invalid = new Passenger();
-		invalid.setDob(new Date());
+		invalid.setDob(new Date().toString());
 		invalid.setfName(null);
 		invalid.setlName("Agrawal");
 		invalid.setGender("F");

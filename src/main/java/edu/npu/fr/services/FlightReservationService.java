@@ -51,4 +51,10 @@ public class FlightReservationService implements FlightReservationServiceI{
 		
 	}
 
+	@Override
+	public Flight getFlight(int flightId) {
+		return flightDao.getFlight(flightId);
+		
+	}
+
 }

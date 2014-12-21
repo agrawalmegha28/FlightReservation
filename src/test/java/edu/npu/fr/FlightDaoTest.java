@@ -25,7 +25,7 @@ public class FlightDaoTest{
 	//This method will test for adding flight
 	public void testAddFlight(){
 		Flight flight = new Flight();
-		flight.setDepart(new Date());
+		flight.setDepart("2014-12-12");
 		flight.setFrom("USA");
 		flight.setTo("India");
 		flight.setName("Lufthansa");
@@ -40,7 +40,7 @@ public class FlightDaoTest{
 	//This method will test for deleting flight
 	public void testDeleteFlight(){
 		Flight flight = new Flight();
-		flight.setDepart(new Date());
+		flight.setDepart("2014-12-12");
 		flight.setFrom("USA");
 		flight.setTo("India");
 		flight.setName("Lufthansa");
@@ -54,7 +54,7 @@ public class FlightDaoTest{
 	//This method will test for updating flight
 	public void testUpdateFlight(){
 		Flight flight = new Flight();
-		flight.setDepart(new Date());
+		flight.setDepart("2014-12-12");
 		flight.setFrom("South Africa");
 		flight.setTo("India");
 		flight.setName("Emirates");

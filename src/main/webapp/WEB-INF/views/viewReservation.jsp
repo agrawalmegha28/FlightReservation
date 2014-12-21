@@ -3,58 +3,68 @@
 <html>
 <head>
 	<title>Reservation Details</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/nav.css" />
 </head>
 <body>
 <h1>
 	Reservation Details
 </h1>
     <table>
+    <c:if test="${not empty code}">
+    	<tr>
+	      <td>
+	      	Reservation Code:
+	      </td>
+	      <td>
+	         ${code}
+	      </td>
+      </tr>
+	</c:if>
     <tr>
-      <td>
-      	Flight Name:
-      </td>
-      <td>
-         ${flight.name}
-      </td>
+	      <td>
+	      	Flight Name:
+	      </td>
+	      <td>
+	         ${flight.name}
+	      </td>
       </tr>
       <tr>
-      <td>
-      	Flight From:
-      </td>
-      <td>
-         ${flight.from}
-      </td>
+	      <td>
+	      	Flight From:
+	      </td>
+	      <td>
+	         ${flight.from}
+	      </td>
     </tr>
     <tr>
-      <td>
-      	Flight To:
-      </td>
-      <td>
-         ${flight.to}
-      </td>
+	      <td>
+	      	Flight To:
+	      </td>
+	      <td>
+	         ${flight.to}
+	      </td>
     </tr>
     <tr>
-      <td>
-      	Flight Depart:
-      </td>
-      <td>
-         ${flight.depart}
-      </td>
+	      <td>
+	      	Flight Depart:
+	      </td>
+	      <td>
+	         ${flight.depart}
+	      </td>
       </tr>
       <tr>
-      <td>
-      	Flight Price:
-      </td>
-      <td>
-         ${flight.price}$
-      </td>
+	      <td>
+	      	Flight Price:
+	      </td>
+	      <td>
+	         ${flight.price}$
+	      </td>
       </tr>
       
       <c:forEach var="curPassenger" items="${passengerList}">
       <tr>
-      <td>${curPassenger.fName}</td>
-      <td>${curPassenger.mName}</td>
-      <td>${curPassenger.lName}</td>
+	      <td>${curPassenger.fName}</td>
+	      <td>${curPassenger.lName}</td>
       </tr>
       </c:forEach>
     

@@ -75,7 +75,7 @@ public class FlightDaoJdbc implements FlightDaoI {
 		Flight flight = new Flight();
 		flight.setFrom(from);
 		flight.setTo(to);
-		flight.setDepart(depart);
+		flight.setDepart(depart.toString());
 		System.out.println(flight);
 		MapSqlParameterSource params = getFlightParamMap(flight);
 		List<Flight> flights = dbTemplate.query(sql, params, new FlightRowMapper());
@@ -103,6 +103,17 @@ public class FlightDaoJdbc implements FlightDaoI {
 				+ "WHERE id = :id";
 		return dbTemplate.update(sql, params);
 		
+	}
+
+
+	
+	public Flight getFlight(int flightId) {
+		String sql = "SELECT * FROM Flight WHERE id = :id";
+		Flight flight = new Flight();
+		flight.setId(flightId);
+		MapSqlParameterSource params = getFlightParamMap(flight);
+		List<Flight> flights = dbTemplate.query(sql, params, new FlightRowMapper());
+		return flights.get(0);  
 	}
 
 }

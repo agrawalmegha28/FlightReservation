@@ -25,7 +25,7 @@ public class PassengerDaoTest{
 	//This method will test for adding Invalid passenger
 	public void testAddInvalidPassenger(){
 		Passenger p = new Passenger();
-		p.setDob(new Date());
+		p.setDob(new Date().toString());
 		//database exception will happen for null first name
 		p.setfName(null);
 		p.setlName("Agrawal");
