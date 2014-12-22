@@ -12,23 +12,28 @@
 	<fmt:message key="home.title"/>
 </h1>
 <form:form action="./searchFlight.html" method="POST" commandName="flight">
+	<div><form:errors path="from" cssClass="error" /></div>
+	<div><form:errors path="to" cssClass="error" /></div>
+	<div><form:errors path="depart" cssClass="error" /></div>
     <table>
     	<tr>
 			<td><form:label path="from">From:</form:label></td><td><form:input path="from"/></td>
-			<td><form:errors path="from" cssClass="error" /></td>
 		</tr>	
 		<tr>
 			<td><form:label path="to">To:</form:label></td><td><form:input path="to"/></td>
-			<td><form:errors path="to" cssClass="error" /></td>
+			
 		</tr>
 		<tr>		
 			<td><form:label path="depart">Depart:</form:label></td><td><form:input path="depart"/></td>
-			<td><form:errors path="depart" cssClass="error" /></td>
+			
 		</tr>
 		<tr>
 			<td><input type="submit" value="search"/></td>
 		</tr>	
 	</table> 
 </form:form>
+<h1>
+	Already made reservation ? Find it <a href="reservationcode.html">here</a>.
+</h1>
 </body>
 </html>

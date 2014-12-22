@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.npu.fr.domain.Flight;
+import edu.npu.fr.domain.FlightValidator;
 import edu.npu.fr.domain.Passenger;
 import edu.npu.fr.domain.Reservation;
+import edu.npu.fr.domain.ReservationValidator;
 import edu.npu.fr.services.FlightReservationServiceI;
 
 @Controller
@@ -53,12 +55,22 @@ public class FlightReservationController {
 	@RequestMapping(value="/searchFlight", method = RequestMethod.POST)
 	public ModelAndView searchFlight(@Valid Flight flight, BindingResult result){
 		ModelAndView mv = null;
+		FlightValidator validator = new FlightValidator();
+		validator.validate(flight, result);
 		if(result.hasErrors()){
 			mv = new ModelAndView("home", "flight", flight);
 			return mv;
 		}
 		
-		List<Flight> flights = flightReservationService.getFlights(flight.getFrom(), flight.getTo(), null);
+		Date date = null;
+		DateFormat format = new SimpleDateFormat("yyyy/mm/dd", Locale.ENGLISH);
+		try {
+			date = format.parse(flight.getDepart());
+		} catch (ParseException e) {
+				System.out.println("Depart is " + flight.getDepart());
+		}
+		
+		List<Flight> flights = flightReservationService.getFlights(flight.getFrom(), flight.getTo(), date);
 		mv = new ModelAndView("viewFlights");
 		mv.addObject("flightList", flights);
 		return mv;
@@ -83,12 +95,22 @@ public class FlightReservationController {
 	}
 	
 	@RequestMapping(value="/makeReservation", method=RequestMethod.POST)
-	public ModelAndView createReservation(Reservation reservation, BindingResult errors, HttpServletRequest request){
+	public ModelAndView createReservation(@Valid Reservation reservation, BindingResult errors, HttpServletRequest request){
 		ModelAndView mv = null;
 		System.out.println(reservation);
+		List<Passenger> authentic = new ArrayList<Passenger>();
+		for(Passenger p : reservation.getPassenger())
+			if(p.isValid())
+				authentic.add(p);
+		reservation.setPassenger(authentic);
+		ReservationValidator validator = new ReservationValidator();
+		validator.validate(reservation, errors);
 		if(errors.hasErrors()){
-			errors.reject("Some error");
-			System.out.println(errors);
+			//Add mock passengers
+			int size = reservation.getPassenger().size();
+			for(int i = size; i < 4; i++ )
+				reservation.getPassenger().add(new Passenger());
+			
 			mv = new ModelAndView("bookView", "reservation", reservation);
 			return mv;
 		}
@@ -104,10 +126,7 @@ public class FlightReservationController {
 
 		}
 		
-		List<Passenger> authentic = new ArrayList<Passenger>();
-		for(Passenger p : reservation.getPassenger())
-			if(p.isValid())
-				authentic.add(p);
+		
 		
 		Reservation res = flightReservationService.reserveFlight(reservation.getFlight(), depart, authentic);
 		

@@ -61,10 +61,10 @@
 	      </td>
       </tr>
       
-      <c:forEach var="curPassenger" items="${passengerList}">
+      <c:forEach var="curPassenger" items="${passengerList}" varStatus="status">
       <tr>
-	      <td>${curPassenger.fName}</td>
-	      <td>${curPassenger.lName}</td>
+	      <td>Passenger ${status.index + 1}</td>
+	      <td>${curPassenger.fName} ${curPassenger.lName}</td>
       </tr>
       </c:forEach>
     

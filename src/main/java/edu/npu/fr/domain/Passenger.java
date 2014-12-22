@@ -2,11 +2,17 @@ package edu.npu.fr.domain;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Passenger {
 	private long id;
+	@NotEmpty
 	private String fName;
+	
 	private String mName;
+	@NotEmpty
 	private String lName;
+	@NotEmpty
 	private String dob;
 	private String gender;
 	
@@ -79,6 +85,9 @@ public class Passenger {
 	}
 
 	public boolean isValid() {
-		return fName != null && lName != null && dob != null && !(fName.equals("") || lName.equals("") || dob.equals(""));
+		return (fName != null && !fName.equals("")) 
+			|| (lName != null && !lName.equals("")) 
+			|| (dob != null && !dob.equals("")) 
+			|| (gender != null && !gender.equals(""));
 	}
 }

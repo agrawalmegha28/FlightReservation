@@ -11,6 +11,7 @@
 <h1>
 	<fmt:message key="flight.detail"/>
 </h1>
+
 <form:form action="./makeReservation.html" method="POST" commandName="reservation">
     <form:input type="hidden" path="flight.id" />
     <form:input type="hidden" path="flight.price" />
@@ -49,14 +50,19 @@
     		<th>Date of Birth</th>
     		<th>Gender</th>
     	</tr>
+     <form:errors path="passenger" cssClass="error"/>	
      <c:forEach var="passenger" items="${reservation.passenger}" varStatus="status">
+     	<!-- div><form:errors path="passenger[${status.index}].fName" cssClass="error" /></div>
+		<div><form:errors path="passenger[${status.index}].lName" cssClass="error" /></div>
+		<div><form:errors path="passenger[${status.index}].dob" cssClass="error" /></div>
+		<div><form:errors path="passenger[${status.index}].gender" cssClass="error" /></div-->
       <tr>
       	<td><input name="passenger[${status.index}].fName" value="${passenger.fName}"/></td>
       	<td><input name="passenger[${status.index}].mName" value="${passenger.mName}"/></td>
       	<td><input name="passenger[${status.index}].lName" value="${passenger.lName}"/></td>
       	<td><input name="passenger[${status.index}].dob" value="${passenger.dob}"/></td>
       	<td><input name="passenger[${status.index}].gender" value="${passenger.gender}"/></td>
-      	<form:errors path="passenger[${status.index}].gender" cssClass="error" />
+      	
       </tr>
     </c:forEach>
     </table>

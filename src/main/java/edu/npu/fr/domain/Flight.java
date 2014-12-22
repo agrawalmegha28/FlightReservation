@@ -12,11 +12,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Flight {
 	private long id;
 	private String name;
-	@NotEmpty
 	private String from;
-	@NotEmpty
 	private String to;
-	@NotNull
 	private String depart;
 	private float price;
 	private int no;
